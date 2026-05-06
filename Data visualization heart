@@ -1,0 +1,54 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv('heart.csv')
+df.head()
+
+print(df.shape)
+df.dtypes
+
+
+# Heatmap
+sns.heatmap(df.corr(), annot=True, linewidths=2)
+plt.title("Correlation Heatmap")
+plt.show()
+
+
+# Histogram
+df['age'].hist()
+plt.title("Age Distribution")
+plt.show()
+
+
+# Scatter Plot
+sns.scatterplot(x='oldpeak',y='chol',hue='target',size='age',data=df)
+plt.title("Oldpeak vs Cholesterol")
+plt.show()
+
+
+# Bar Graph
+df.target.value_counts().plot(kind='bar')
+plt.title("Heart Disease Count")
+plt.show()
+
+
+# Count Plot
+sns.countplot(x='cp', hue='target', data=df)
+plt.title("Chest Pain Type vs Target")
+plt.show()
+
+
+# Pie Chart
+young = df[(df['age'] >=29) & (df['age'] < 40)]
+middle = df[(df['age'] >=40) & (df['age'] < 55)]
+old = df[(df['age'] >=55)]
+colors = ['blue', 'green', 'yellow']
+
+plt.pie(
+    [len(young), len(middle), len(old)],
+    colors=colors,
+    labels=['Young', 'Middle', 'Old'])
+
+plt.title("Age Group Distribution")
+plt.show()
