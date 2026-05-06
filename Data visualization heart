@@ -43,12 +43,12 @@ plt.show()
 young = df[(df['age'] >=29) & (df['age'] < 40)]
 middle = df[(df['age'] >=40) & (df['age'] < 55)]
 old = df[(df['age'] >=55)]
+
 colors = ['blue', 'green', 'yellow']
 
-plt.pie(
-    [len(young), len(middle), len(old)],
-    colors=colors,
-    labels=['Young', 'Middle', 'Old'])
+colors = ['blue','green','yellow']
+labels = ['young', 'middle','old']
+plt.pie([len(young),len(middle),len(old)],colors=colors,labels=labels,autopct='%1.1f%%');
 
 plt.title("Age Group Distribution")
 plt.show()
