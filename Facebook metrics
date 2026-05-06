@@ -1,0 +1,24 @@
+import pandas as pd
+df = pd.read_csv('fb.csv')
+df.head()
+
+
+print("creating dataset")
+subset1 = df[['Page total likes', 'Type', 'Category']]
+subset2 = df[['Paid', 'Post Weekday']]
+subset1
+
+
+print("merging data")
+merge_data = pd.concat([subset1, subset2], axis=1)
+merge_data.head()
+
+
+print("sorting data")
+sort_data = df.sort_values(by='Lifetime Post Total Reach')
+sort_data.head()
+
+
+print("transposing data")
+transpose_data = df.head().transpose()
+transpose_data
