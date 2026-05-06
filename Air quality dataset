@@ -1,0 +1,43 @@
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import MinMaxScaler
+
+df = pd.read_csv('airquality.csv')
+df.head()
+
+
+print("data cleaning")
+df['Ozone'] = df['Ozone'].fillna(df['Ozone'].mean())
+df['Solar.R'] = df['Solar.R'].fillna(df['Solar.R'].mean())
+df.head()
+
+
+print("data integration")
+subset1 = df[['Ozone', 'Temp']]
+subset2 = df[['Wind', 'Month']]
+integrate = pd.concat([subset1, subset2], axis=1)
+integrate.head()
+
+
+print("data transformation")
+scaler = MinMaxScaler()
+transform = scaler.fit_transform(df[['Ozone', 'Solar.R', 'Wind', 'Temp']])
+print(transform)
+
+
+print("error correcting")
+df = df.drop_duplicates()
+df[['Ozone', 'Solar.R', 'Wind', 'Temp']] = df[
+    ['Ozone', 'Solar.R', 'Wind', 'Temp']
+].clip(lower=0)
+df.head()
+
+
+print("data model building")
+X = df[['Ozone']]
+Y = df['Temp']
+model = LinearRegression()
+model.fit(X, Y)
+print(model.score(X, Y))
+print(model.predict([[100]]))
