@@ -1,0 +1,33 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv('fb.csv')
+df.head()
+
+df.shape
+df.dtypes
+
+plt.figure(figsize=(12,8))
+sns.heatmap(df.corr(numeric_only=True), annot=True, linewidths=2)
+plt.title("Facebook Dataset Correlation Heatmap")
+plt.show()
+
+df['Category'].hist()
+plt.title("Category Distribution")
+plt.show()
+
+sns.scatterplot(x='Lifetime Post Total Reach', y='like', data=df)
+plt.title("Reach vs Likes")
+plt.show()
+
+df['Type'].value_counts().plot(kind='bar')
+plt.title("Post Type Count")
+plt.xlabel("Post Type")
+plt.ylabel("Count")
+plt.show()
+
+sns.countplot(x='Paid', hue='Type', data=df)
+plt.title("Paid Promotion vs Post Type")
+plt.show()
+
