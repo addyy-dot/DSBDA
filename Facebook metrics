@@ -22,3 +22,11 @@ sort_data.head()
 print("transposing data")
 transpose_data = df.head().transpose()
 transpose_data
+
+
+print("shape of data")
+df.shape
+
+print("reshaping data")
+reshape_data = pd.melt(subset1)
+reshape_data.head()
