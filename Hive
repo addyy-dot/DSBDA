@@ -1,0 +1,47 @@
+ hive
+ create database rp;
+ use rp;
+ create table flight(fno int ,source varchar(10),year int ,delay float);
+
+ alter table flight rename to flight_info;
+
+alter table flight_info add columns (price float);
+
+ drop table flight;
+
+ create table flight(fno int , source varchar(10),year int ,delay float)
+    > row format delimited
+    > fields terminated by ','
+    > lines terminated by '\n'
+    > stored as textfile;
+
+insert into flight values(234,"delhi",2002,12.00);
+select*from flight  ;
+   
+gedit words.txt   # in terminal
+
+load data local inpath 'words.txt'
+    > overwrite into table flight;
+
+ select *from flight;
+
+create table nflight(fno int ,dest varchar(10),year int);
+
+ insert into nflight values (236,"jaipur",2002);
+
+ select a.fno,a.source,a.year,a.delay,b.dest from flight a join nflight b on (a.fno=b.fno);
+
+
+CREATE INDEX flight_index
+ON TABLE flight (fno)
+AS 'COMPACT'
+WITH DEFERRED REBUILD;
+
+
+SELECT  AVG(dep_delay) AS avg_delay
+FROM flight
+WHERE year = 2026;
+
+
+
+
